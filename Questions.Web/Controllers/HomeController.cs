@@ -40,7 +40,7 @@ namespace Questions.Web.Controllers
             repository.AddQuestion(question, tags);
             return Redirect("/");
         }
-        [Authorize]
+        
         public IActionResult Question(int id)
         {
             var repository = new QuestionRepository(_connection);
