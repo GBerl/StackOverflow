@@ -1,0 +1,19 @@
+﻿@using Questions.Data;
+@model IEnumerable<Question>
+@foreach (Question q in Model)
+{
+    <div class="container">
+        <a href="/home/question?id=@q.Id"><h2>@q.Title</h2></a>
+        <div class="row col-md-6">
+            <lable class="col-md-2">Likes @q.Likes.Count()</lable>
+            <div class="col-md-offset-2">
+                @foreach (QuestionTag qt in q.QuestionTags)
+                {
+                    <div class="col-md-1">
+                        <lable class="label label-info">@qt.Tag.Name</lable>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+}

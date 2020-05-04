@@ -1,0 +1,54 @@
+﻿@using Questions.Data;
+@model QuestionViewModel
+<div class="well">
+    <h1 style="color:blue">@Model.Question.Title</h1>
+    <div class="row col-md-6">
+        @foreach (QuestionTag qt in Model.Question.QuestionTags)
+        {
+            <div class="col-md-1">
+                <lable class="label label-info">@qt.Tag.Name</lable>
+            </div>
+        }
+    </div>
+    <br />
+    <span>@Model.Question.Text</span>
+    <br />
+    <div style="margin-left:20px">
+        @if (Model.IsLoggedIn)
+        {
+            <input type="hidden" name="questionid" id="qId" value="@Model.Question.Id" />
+            <div class="row" style="margin-top:15px">
+                <textarea id="text" name="text" rows="8" class="form-control" required placeholder="Your answer..."></textarea>
+                <button id="btn" class="btn btn-success">Save</button>
+            </div>
+        }
+        <h4 style="color:blue">Answers</h4>
+        <div id="answers">
+            @foreach (Answer a in Model.Question.Answers)
+            { 
+                <span>@a.Text</span>
+                <lable style="color:blue">email: @a.UserEmail</lable>
+                <br />
+            }
+        </div>
+    </div>
+    <br />
+    <div class="row col-md-4">
+        @if (Model.IsLoggedIn && !Model.Liked)
+        { 
+            <button id="likebtn"class="btn btn-primary">Like</button>
+        }
+        else
+        {
+            <lable>Likes</lable>
+        }
+        <input class="small" id="likes" size="2" value="@Model.Question.Likes.Count()" />
+    </div>
+    <br />
+</div>
+
+@section Scripts
+{
+    <script src="~/js/Question.js"></script>
+}
+
